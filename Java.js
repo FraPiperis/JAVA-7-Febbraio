@@ -1,12 +1,14 @@
-let showcards = document.getElementById("showcards")
-showcards.innerHTML=""
 
-.forEach(song => {
-        fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem')
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+function fetchsongs() {
+    fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem')
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error));
+}
 
+function displaysongs(songs) {
+    let showcards = document.getElementById("showcards")
+    showcards.innerHTML=""
+    songs.forEach(song => {
         const card = document.createElement("div")
         card.classList.add("card", "mb-2", "bg-transparent" , "border-0")
 
@@ -30,6 +32,9 @@ showcards.innerHTML=""
 
         showcards.appendChild(card)
 });
+}
+
+fetchsongs(); 
 
 
 
