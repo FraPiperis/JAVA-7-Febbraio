@@ -1,14 +1,21 @@
 
-function fetchsongs() {
+function displaysongs(songs) {
     fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem')
     .then(response => response.json())
+    .then(songs => {
+        displaysongs(songs); 
+        return songs; 
+    })
+    
     .catch(error => console.error('Error:', error));
-}
 
-function displaysongs(songs) {
-    let showcards = document.getElementById("showcards")
-    showcards.innerHTML=""
-    songs.forEach(song => {
+    //let showcards = document.getElementById("showcards")
+    //showcards.innerHTML=""
+    
+    let eminem = document.getElementById("eminem")
+    eminem.classList.remove("d-none"); 
+
+    songs.data.forEach(song => {
         const card = document.createElement("div")
         card.classList.add("card", "mb-2", "bg-transparent" , "border-0")
 
@@ -30,11 +37,12 @@ function displaysongs(songs) {
         cardBody.appendChild(cardTitle); 
         cardBody.appendChild(cantanti); 
 
+        card.appendChild(img); 
         showcards.appendChild(card)
 });
 }
 
-fetchsongs(); 
+displaysongs(); 
 
 
 
